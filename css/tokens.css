@@ -1,0 +1,104 @@
+/* ==========================================================
+   tokens.css
+   Sumber kebenaran untuk warna, tipografi, bentuk, bayangan,
+   durasi, dan z-index. Tema: "Nebula Refined".
+
+   Aturan pakai:
+   - File lain memakai var(--nama). Jangan tulis warna mentah
+     jika sudah ada tokennya.
+   - Breakpoint tidak bisa berupa variabel CSS, jadi nilainya
+     ditulis langsung di @media: 480px, 560px, 700px, 719px/720px.
+
+   Konvensi penamaan kelas (CSS dan HTML):
+   - c-*              warna judul (c-pink, c-cyan, ...)
+   - tint-*           warna kartu dan paragraf pembukanya
+   - *-card           kotak kecil berisi emoji, judul, dan teks
+   - *-grid           susunan kolom (CSS grid)
+   - *-row, *-item    baris daftar
+   - is-*             status sementara yang diatur JS
+   - nama--varian     varian sebuah komponen (info-item--pink)
+   - *-1 ... *-6     varian bernomor (teacher-1, badge-1, genre-1)
+   ========================================================== */
+
+:root {
+  /* Latar dan permukaan */
+  --bg-ink: #0a0f1e;
+  --surface: #131c3a;
+  --surface-raised: #1a2650;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --line-dashed: rgba(255, 255, 255, 0.14);
+  --fill-soft: rgba(255, 255, 255, 0.08);
+
+  /* Latar khusus komponen */
+  --nav-bg: rgba(10, 15, 30, 0.85);
+  --chrome-bg: rgba(10, 15, 30, 0.9);
+  --overlay: rgba(0, 0, 0, 0.7);
+
+  /* Teks */
+  --text: #eef3ff;
+  --text-muted: #bccbef;
+
+  /* Teks gelap di atas warna aksen (kartu gradien, tombol) */
+  --ink-on-cool: #04241a;
+  --ink-on-warm: #320a26;
+
+  /* Warna paragraf pembuka kartu (dipakai .tint-*) */
+  --tint-pink: #ffc2ee;
+  --tint-cyan: #a9f0ea;
+  --tint-yellow: #ffe9ae;
+  --tint-purple: #d8c6ff;
+  --tint-orange: #ffc9a0;
+  --tint-green: #b6f2cd;
+
+  /* Aksen */
+  --pink: #ff4fd8;
+  --pink-soft: #ff7de4;
+  --cyan: #33f2e0;
+  --yellow: #ffcb47;
+  --purple: #8b6bff;
+  --orange: #ff8a3d;
+  --green: #3ef2a0;
+  --sky: #7ad0ff;
+
+  /* Tipografi */
+  --font-display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --font-body: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Bentuk */
+  --radius-xl: 20px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-card-sm: 18px;
+  --radius-chip: 14px;
+  --radius-sm: 10px;
+  --radius-xs: 8px;
+  --radius-pill: 999px;
+
+  /* Bayangan */
+  --shadow-sm: 0 10px 22px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 18px 34px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 26px 50px rgba(0, 0, 0, 0.45);
+  --shadow-chip: 0 8px 20px rgba(0, 0, 0, 0.35);
+
+  /* Fokus dan gerak */
+  --focus-ring: 3px solid var(--yellow);
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --dur-fast: 0.15s;
+  --dur-base: 0.25s;
+
+  /* Latar langit biru (bergaya Bintang Zero, dipakai backdrop-soda.css) */
+  --soda-inner: #0b4f8a;
+  --soda-mid: #04294e;
+  --soda-outer: #010c14;
+
+  /* Lapisan z-index */
+  --z-bg: 0;
+  --z-content: 1;
+  --z-badge: 5;
+  --z-nav: 10;
+  --z-progress: 11;
+  --z-modal: 20;
+  --z-confetti: 25;
+  --z-toast: 30;
+}

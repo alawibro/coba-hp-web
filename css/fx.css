@@ -1,0 +1,201 @@
+/* ==========================================================
+   fx.css
+   Lapisan dekoratif: latar 3D, nebula, kilat, pecahan kaca,
+   progress bar, teks bergerak, dan confetti.
+   Semua gerakan otomatis mati saat "kurangi gerakan" aktif
+   (diatur global di base.css; tambahan khusus ada di bawah).
+   ========================================================== */
+
+/* ---------- Latar: canvas WebGL dan 2D ---------- */
+/* Semua lapisan dekoratif dibungkus satu kontainer yang memotong isinya.
+   Elemen yang melewati tepi layar tidak lagi memperlebar area scroll. */
+.deco {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  overflow: hidden;
+  contain: paint;
+  pointer-events: none;
+}
+
+/* Seluruh latar (langit 2D + 3D) ikut sedikit miring mengikuti kursor.
+   scale(1.06) menutup tepi agar tidak ada celah saat miring. */
+#bg3d {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  transform: perspective(1400px) rotateX(var(--tiltX, 0deg)) rotateY(var(--tiltY, 0deg)) scale(1.06);
+  transition: transform 0.2s linear;
+}
+
+#bg3d canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#nebulaGlow {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  background-image: url("../assets/img/nebula.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  filter: saturate(1.15) contrast(1.05);
+}
+
+#lightning-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: #eaf2ff;
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #nebulaGlow {
+    opacity: 0.3;
+  }
+
+  #bgWebGL,
+  #lightning-flash {
+    display: none;
+  }
+}
+
+/* ---------- Pecahan kaca melayang ---------- */
+.shard {
+  position: fixed;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(2px);
+  will-change: transform;
+  animation: drift 14s ease-in-out infinite;
+}
+
+.shard1 { top: 10%; left: 8%;  width: 120px; height: 120px; animation-delay: 0s; }
+.shard2 { top: 62%; left: 85%; width: 160px; height: 160px; animation-delay: 2.4s; }
+.shard3 { top: 78%; left: 14%; width: 90px;  height: 90px;  animation-delay: 4.8s; }
+.shard4 { top: 18%; left: 90%; width: 80px;  height: 80px;  animation-delay: 1.2s; }
+.shard5 { top: 44%; left: 48%; width: 100px; height: 100px; animation-delay: 3.6s; }
+.shard6 { top: 92%; left: 60%; width: 70px;  height: 70px;  animation-delay: 5.4s; }
+
+@keyframes drift {
+  0%,
+  100% { transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  25% { transform: translate3d(10px, -24px, 40px) rotateX(12deg) rotateY(-14deg) rotateZ(6deg); }
+  50% { transform: translate3d(-14px, -10px, 80px) rotateX(-8deg) rotateY(10deg) rotateZ(-4deg); }
+  75% { transform: translate3d(-8px, 18px, 30px) rotateX(6deg) rotateY(8deg) rotateZ(3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shard {
+    animation: none;
+  }
+}
+
+/* ---------- Progress bar scroll ---------- */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-progress);
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--pink), var(--cyan), var(--yellow));
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+/* ---------- Teks pelangi (judul khusus) ---------- */
+.rainbow-text {
+  background: linear-gradient(90deg, var(--pink), var(--orange), var(--yellow), var(--green), var(--cyan), var(--purple));
+  background-size: 200% auto;
+  color: var(--yellow);
+  font-weight: 800;
+  animation: rainbow-move 5s linear infinite;
+}
+
+@keyframes rainbow-move {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Judul game: gradasi kilau. Harus ditulis sebelum blok @supports
+   agar background-clip tidak tertimpa oleh shorthand "background". */
+.game-card h3 {
+  background: linear-gradient(90deg, #fff, #fff6d0, #fff, #ffe1f0, #fff);
+  background-size: 200% auto;
+  animation: rainbow-move 3.5s linear infinite;
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .rainbow-text,
+  .game-card h3 {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* ---------- Teks beranda yang bergerak ---------- */
+#beranda .anim-letter {
+  display: inline-block;
+  animation: letter-float 2.6s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 50ms);
+}
+
+#beranda .anim-word {
+  display: inline-block;
+  animation: word-float 3s ease-in-out infinite;
+  animation-delay: calc(var(--d, 0) * 100ms);
+}
+
+#beranda .float-whole {
+  display: inline-block;
+  animation: whole-float 3.4s ease-in-out infinite;
+}
+
+@keyframes letter-float {
+  0%,
+  100% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(-7px) rotate(-5deg); }
+  60% { transform: translateY(3px) rotate(4deg); }
+}
+
+@keyframes word-float {
+  0%,
+  100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(-1.5deg); }
+}
+
+@keyframes whole-float {
+  0%,
+  100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+/* ---------- Confetti saat tombol ditekan ---------- */
+.confetti {
+  position: fixed;
+  z-index: var(--z-confetti);
+  pointer-events: none;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1), opacity 0.9s ease;
+}
+
+.confetti.is-going {
+  opacity: 0;
+  transform: translate(var(--dx), var(--dy)) rotate(var(--rot));
+}

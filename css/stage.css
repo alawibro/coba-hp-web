@@ -1,0 +1,159 @@
+/* ==========================================================
+   stage.css
+   Layout dua lapis di Beranda: biodata (hero-copy) di satu sisi,
+   stage model 3D soda (soda-stage) di sisi lain.
+
+   Prinsip:
+   - Kotak stage dikunci dengan aspect-ratio, jadi ruangnya sudah
+     tersedia sebelum model 3D selesai dimuat (tanpa layout shift).
+   - Mobile memakai satu kolom dan stage berukuran kecil, agar teks
+     biodata tetap nyaman dibaca.
+   - Di layar sentuh, geser vertikal tetap menggulir halaman
+     (touch-action: pan-y). Geser horizontal memutar model.
+   ========================================================== */
+
+/* ---------- Susunan dasar (mobile, satu kolom) ---------- */
+.hero-dual {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 26px;
+  padding: 24px 0 10px;
+}
+
+.hero-copy {
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+}
+
+/* ---------- Stage 3D (kaca buram di atas latar nebula) ---------- */
+.soda-stage {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 260px);
+  padding: 12px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03));
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+}
+
+/* Kotak 4:5 tempat model dirender. Rasio dikunci agar CLS = 0 */
+.soda-stage__frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(51, 242, 224, 0.22),
+    rgba(139, 107, 255, 0.14) 50%,
+    transparent 72%
+  );
+}
+
+.soda-stage__model {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  --poster-color: transparent;
+  border-radius: inherit;
+  /* Vertikal = scroll halaman, horizontal = putar model */
+  touch-action: pan-y;
+}
+
+/* Fokus keyboard bisa masuk ke bagian dalam model (shadow DOM), yang tidak
+   menerima :focus-visible. Karena itu sorotannya dipasang di bingkai stage. */
+.soda-stage:has(.soda-stage__model:focus-within) .soda-stage__frame {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.soda-stage__caption {
+  margin-top: 10px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+
+/* ---------- Status pemuatan model ---------- */
+.soda-stage.is-error .soda-stage__caption {
+  color: var(--orange);
+}
+
+/* ---------- Mobile: blur dimatikan agar animasi tetap ringan ---------- */
+@media (max-width: 719px) {
+  .soda-stage {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--surface-raised);
+  }
+}
+
+/* ---------- Tablet dan desktop: dua kolom ---------- */
+@media (min-width: 720px) {
+  .hero-dual {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+    gap: 40px;
+    padding: 30px 0 10px;
+  }
+
+  .soda-stage {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* ---------- Laptop/HP landscape (tinggi layar pendek) ---------- */
+@media (orientation: landscape) and (max-height: 540px) {
+  .hero-dual {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    padding: 16px 0 6px;
+  }
+
+  /* Tinggi frame dibatasi relatif terhadap tinggi viewport */
+  .soda-stage {
+    width: min(42vw, calc(40vh + 24px));
+    width: min(42vw, calc(40svh + 24px));
+  }
+}
+
+/* ---------- Pilihan varian (Bintang Zero / Radler Lemon) ---------- */
+.soda-switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.soda-switch__btn {
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line-strong);
+  background: var(--fill-soft);
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.soda-switch__btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.soda-switch__btn[aria-pressed="true"] {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--bg-ink);
+}

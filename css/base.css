@@ -1,0 +1,78 @@
+/* ==========================================================
+   base.css
+   Reset, tipografi dasar, fokus, dan pengaturan reduced motion.
+   ========================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: linear-gradient(
+    180deg,
+    #01030d 0%,
+    #05123a 14%,
+    #071e57 28%,
+    #0a2d6e 42%,
+    #123f6e 56%,
+    #0f6e6c 70%,
+    #1a9e7a 84%,
+    #06110d 100%
+  );
+  background-attachment: fixed;
+  min-height: 100%;
+  overflow-x: hidden;
+  perspective: 1400px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Hormati pengaturan "kurangi gerakan" dari sistem operasi */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

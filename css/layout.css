@@ -1,0 +1,234 @@
+/* ==========================================================
+   layout.css
+   Navigasi, kontainer utama, dan bagian hero.
+   ========================================================== */
+
+/* ---------- Navigasi ---------- */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+.brand span {
+  color: var(--pink);
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Warna aktif tiap tab diambil dari --tab-fill */
+.tab-btn {
+  min-height: 44px; /* target sentuh minimal, sama di semua ukuran layar */
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 9px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--fill-soft);
+  color: var(--text-muted);
+  transition: transform var(--dur-fast) ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.tab-btn:hover {
+  transform: translateY(-2px);
+}
+
+.tab-btn[aria-selected="true"] {
+  background: var(--tab-fill, var(--pink));
+  color: var(--bg-ink);
+}
+
+.tab-btn[data-page="beranda"]  { --tab-fill: var(--pink); }
+.tab-btn[data-page="sekolah"]  { --tab-fill: var(--cyan); }
+.tab-btn[data-page="hobi"]     { --tab-fill: var(--yellow); }
+.tab-btn[data-page="anime"]    { --tab-fill: var(--purple); }
+.tab-btn[data-page="game"]     { --tab-fill: linear-gradient(135deg, var(--pink), var(--cyan)); }
+.tab-btn[data-page="bini"]     { --tab-fill: linear-gradient(135deg, var(--pink), var(--purple)); }
+.tab-btn[data-page="funfact"]  { --tab-fill: var(--green); }
+.tab-btn[data-page="diet"]     { --tab-fill: var(--green); }
+.tab-btn[data-page="kuliah"]   { --tab-fill: linear-gradient(135deg, var(--yellow), var(--cyan)); }
+.tab-btn[data-page="pkl"]      { --tab-fill: linear-gradient(135deg, var(--orange), var(--pink)); }
+.tab-btn[data-page="kontak"]   { --tab-fill: var(--sky); }
+.tab-btn[data-page="pesan"]    { --tab-fill: var(--orange); }
+
+/* ---------- Kontainer utama ---------- */
+.main {
+  position: relative;
+  z-index: var(--z-content);
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  /* Konten tidak dimiringkan agar area klik tetap sesuai tampilan.
+     Efek kemiringan kursor hanya diterapkan ke latar (lihat fx.css). */
+}
+
+.page {
+  animation: page-in 0.6s var(--ease-out);
+  transform-style: preserve-3d;
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) rotateX(-6deg) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+/* ---------- Hero (Beranda) ---------- */
+.hero {
+  text-align: center;
+  padding: 30px 0 10px;
+}
+
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.15;
+}
+
+.hero .name-hi {
+  color: var(--pink-soft);
+}
+
+.hero .name-lo {
+  color: var(--cyan);
+}
+
+.hero p.tagline {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-top: 10px;
+  min-height: 1.5em;
+}
+
+.kelas-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+/* ---------- Avatar ---------- */
+.avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background-image: url("../assets/img/avatar.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 0 6px var(--fill-soft), 0 20px 40px rgba(255, 79, 216, 0.25);
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.avatar:active {
+  transform: scale(0.92) rotate(-8deg);
+}
+
+.avatar.is-pop {
+  transform: scale(1.12) rotate(var(--pop, -10deg));
+}
+
+/* Dua cincin dekoratif di sekitar avatar */
+.avatar::before,
+.avatar::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.avatar::before {
+  inset: -14px;
+  border: 2px solid rgba(255, 203, 71, 0.5);
+  animation: ring-pulse 3s ease-in-out infinite;
+}
+
+.avatar::after {
+  inset: -26px;
+  border: 1px dashed rgba(51, 242, 224, 0.4);
+  animation: ring-spin 18s linear infinite;
+}
+
+@keyframes ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.25;
+  }
+}
+
+@keyframes ring-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 480px) {
+  .site-nav {
+    padding: 12px 14px;
+    justify-content: center;
+  }
+
+  .brand {
+    width: 100%;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+
+  .tabs {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .tab-btn {
+    font-size: 0.82rem;
+    padding: 7px 12px;
+  }
+
+  .main {
+    padding: 28px 16px 64px;
+  }
+}
+
+/* ---------- Tagline mengetik: ruang untuk dua baris di HP ----------
+   Salah satu tagline membungkus dua baris di layar sempit. Ruang dua baris
+   dicadangkan agar tinggi tidak melompat saat teks diketik (CLS). */
+@media (max-width: 719px) {
+  .hero p.tagline {
+    min-height: 2lh;
+  }
+}

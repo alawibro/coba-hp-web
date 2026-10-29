@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M. Baihaqi Alawi — Biodata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&family=Inter:opsz,wght@14..32,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/tokens.css">
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/layout.css">
+<link rel="stylesheet" href="./css/components.css">
+<link rel="stylesheet" href="./css/pages.css">
+<link rel="stylesheet" href="./css/fx.css">
+<link rel="stylesheet" href="./css/stage.css">
+<link rel="stylesheet" href="./css/backdrop-soda.css">
+<!-- model-viewer: komponen web untuk model .glb (dimuat sebagai module, tidak memblokir render) -->
+<script src="./vendor/model-viewer-umd.min.js"></script>
+  
+  <link rel="stylesheet" href="./assets/index-DsjjmNH-.css">
+</head>
+<body>
+<div id="shader-bg" aria-hidden="true"></div>
+<div id="scrollProgress"></div>
+<div class="deco" aria-hidden="true">
+<div id="nebulaGlow"></div>
+<div id="bg3d" aria-hidden="true"><canvas id="bgCanvas"></canvas><canvas id="bgWebGL"></canvas></div>
+<div class="soda-bubbles" aria-hidden="true"><i style="--x:4%;--s:18px;--o:.35;--d:16s;--delay:-4s"></i><i style="--x:11%;--s:26px;--o:.5;--d:22s;--delay:-11s"></i><i style="--x:19%;--s:12px;--o:.25;--d:13s;--delay:-2s"></i><i style="--x:27%;--s:34px;--o:.45;--d:26s;--delay:-17s"></i><i style="--x:34%;--s:22px;--o:.3;--d:18s;--delay:-8s"></i><i style="--x:42%;--s:16px;--o:.55;--d:15s;--delay:-14s"></i><i style="--x:51%;--s:28px;--o:.35;--d:24s;--delay:-6s"></i><i style="--x:58%;--s:14px;--o:.25;--d:12s;--delay:-20s"></i><i style="--x:66%;--s:30px;--o:.45;--d:20s;--delay:-1s"></i><i style="--x:73%;--s:20px;--o:.3;--d:17s;--delay:-12s"></i><i style="--x:81%;--s:24px;--o:.4;--d:23s;--delay:-9s"></i><i style="--x:88%;--s:12px;--o:.5;--d:14s;--delay:-3s"></i><i style="--x:94%;--s:36px;--o:.3;--d:28s;--delay:-18s"></i><i style="--x:47%;--s:10px;--o:.2;--d:19s;--delay:-7s"></i></div>
+<div class="shard shard1" aria-hidden="true"></div>
+<div class="shard shard2" aria-hidden="true"></div>
+<div class="shard shard3" aria-hidden="true"></div>
+<div class="shard shard4" aria-hidden="true"></div>
+<div class="shard shard5" aria-hidden="true"></div>
+<div class="shard shard6" aria-hidden="true"></div>
+</div>
+<div id="lightning-flash"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<button type="button" id="scrollTopBtn" class="to-top" title="Kembali ke atas" aria-label="Kembali ke atas">↑</button>
+<div id="secretModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="secretTitle" hidden>
+<div class="modal__box">
+<h2 id="secretTitle"> Kode Rahasia Ketemu!</h2>
+<p>Selamat, kamu nemu easter egg-nya! Kamu resmi jadi fans sejati halaman ini. Booyah! </p>
+<button type="button" class="btn btn--accent" id="secretClose">Asiap!</button>
+</div>
+</div>
+<nav class="site-nav" aria-label="Halaman biodata">
+<h1 class="brand">Halo, aku <span>Baihaqi</span> </h1>
+<div class="tabs" role="tablist" aria-label="Pilih halaman" id="tabs-root"></div>
+</nav>
+<main class="main">
+<section class="page" id="beranda" role="tabpanel" aria-labelledby="tab-beranda">
+<div class="hero hero-dual">
+<div class="hero-copy">
+<button type="button" class="avatar" id="avatarBtn" title="Coba klik-klik aku!" aria-label="Avatar M. Baihaqi Alawi"></button>
+<h1><span class="name-hi">M. Baihaqi</span> <span class="name-lo">Alawi</span></h1>
+<p class="tagline" id="typedTagline"><span id="typedText"></span><span class="cursor-blink" aria-hidden="true">&nbsp;</span></p>
+<div class="kelas-tag rainbow-text">Aku Kelas 11 TKJ 2</div>
+<div class="badge-row">
+<span class="badge badge-1"> Siswa SMK</span>
+<span class="badge badge-2"> Food Lover</span>
+<span class="badge badge-3"> Anime Fan</span>
+<span class="badge badge-4"> Ceria</span>
+<span class="badge badge-5"> Gamer FF</span>
+<span class="badge badge-6"> Jomblo</span>
+</div>
+</div>
+<figure class="soda-stage">
+<div class="soda-stage__frame">
+<model-viewer class="soda-stage__model" alt="" environment-image="neutral" exposure="1.1" shadow-intensity="0.8" shadow-softness="1" camera-controls disable-zoom interaction-prompt="none" rotation-per-second="20deg" auto-rotate-delay="4000" tabindex="0"></model-viewer>
+</div>
+<figcaption id="sodaCaption" class="soda-stage__caption">Geser untuk memutar ↻</figcaption>
+<div class="soda-switch" role="group" aria-label="Pilih varian soda">
+<button type="button" class="soda-switch__btn" data-variant="zero" aria-pressed="true">Bintang Zero</button>
+<button type="button" class="soda-switch__btn" data-variant="radler" aria-pressed="false">Radler Lemon</button>
+</div>
+</figure>
+</div>
+<div class="status-strip">
+<div class="dot"></div>
+<div id="statusText">Status hari ini: pengen buru-buru pulang sekolah! </div>
+</div>
+<div class="card tint-pink">
+<video class="card-video" src="./assets/clips/clip-01.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-pink">Tentang Aku</h2>
+<p>Perkenalkan, namaku <strong>M. Baihaqi Alawi</strong>. Aku bersekolah di <strong>SMK Raden Paku</strong>. Di waktu luang, aku paling suka makan makanan enak, nonton anime favoritku, dan main Free Fire. Yuk jelajahi halaman lain untuk kenal aku lebih jauh!</p>
+<div class="info-grid">
+<div class="info-item">
+<div class="label">NAMA LENGKAP</div>
+<div class="value">M. Baihaqi Alawi</div>
+</div>
+<div class="info-item">
+<div class="label">SEKOLAH</div>
+<div class="value">SMK Raden Paku</div>
+</div>
+<div class="info-item">
+<div class="label">KELAS</div>
+<div class="value">11 TKJ 2</div>
+</div>
+<div class="info-item">
+<div class="label">JENIS KELAMIN</div>
+<div class="value">Laki-laki</div>
+</div>
+<div class="info-item">
+<div class="label">UMUR</div>
+<div class="value">15 Tahun</div>
+</div>
+<div class="info-item">
+<div class="label">STATUS</div>
+<div class="value">Jomblo </div>
+</div>
+<div class="info-item">
+<div class="label">ID FREE FIRE</div>
+<button type="button" class="value value--action" id="ffIdValue" title="Klik buat copy">1890895075 </button>
+</div>
+<div class="info-item">
+<div class="label">TANGGAL LAHIR</div>
+<div class="value">24 Februari 2010</div>
+</div>
+<div class="info-item">
+<div class="label">CITA-CITA</div>
+<div class="value">Jadi Miliarder </div>
+</div>
+</div>
+</div>
+<div class="card tint-green">
+<video class="card-video" src="./assets/clips/clip-02.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-green">Keluargaku</h2>
+<p>Aku bukan anak tunggal — di rumah aku punya kakak dan adik yang selalu rame kalau kumpul bareng, plus satu anggota keluarga berbulu yang paling gemesin!</p>
+<div class="info-grid">
+<div class="info-item info-item--pink">
+<div class="label">KAKAK PEREMPUAN</div>
+<div class="value">Icha</div>
+</div>
+<div class="info-item info-item--yellow">
+<div class="label">ADIK</div>
+<div class="value">Chelsea</div>
+</div>
+<div class="info-item info-item--orange">
+<div class="label"> KUCING KESAYANGAN</div>
+<div class="value">Alex</div>
+</div>
+</div>
+</div>
+<div class="card tint-yellow">
+<video class="card-video" src="./assets/clips/clip-03.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-yellow">Fakta-Fakta Receh </h2>
+<p>Beberapa hal random tentang hidupku sehari-hari, dijamin relate:</p>
+<div class="fact-grid">
+<div class="fact-card">
+<span class="emoji"></span>
+<h3>Alex</h3>
+<p>Kucing kesayangan yang selalu nemenin di rumah.</p>
+</div>
+<div class="fact-card">
+<span class="emoji"></span>
+<h3>Dompet Kosong</h3>
+<p>Ga punya duit... Donasi dong </p>
+</div>
+<div class="fact-card">
+<span class="emoji"></span>
+<h3>Waifu Real</h3>
+<p>Pengen banget waifu jadi nyata (halu emang ).</p>
+</div>
+<div class="fact-card">
+<span class="emoji"></span>
+<h3>Pengen Punya Paketan</h3>
+<p>Tapi... ga punya jir </p>
+</div>
+<div class="fact-card span-full">
+<span class="emoji"></span>
+<h3>Pengen Makaaaan</h3>
+<p>Laper terus tiap hari, mohon dimaklumi.</p>
+</div>
+</div>
+</div>
+<div class="card tint-purple">
+<video class="card-video" src="./assets/clips/clip-04.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-purple">Sisi Santaiku</h2>
+<div class="fact-card fact-card--aside fact-card--purple">
+<span class="emoji emoji--inline"></span>
+<p class="p-flush">Jujur aja, aku ini masih rada pemalas dan belum terlalu rajin — masih proses belajar buat lebih disiplin. Tapi santai aja, semua orang juga punya progressnya masing-masing kok!</p>
+</div>
+</div>
+<div class="fun-card">
+<h2 class="c-cyan h2-tight"> Roll Fakta Receh Random</h2>
+<p class="text-dim">Klik tombol buat munculin quote absurd hasil random!</p>
+<button type="button" class="roll-btn" id="rollBtn"> Roll Sekarang</button>
+<div id="quoteOutput" class="quote-output" aria-live="polite"></div>
+</div>
+</section>
+<section class="page" id="sekolah" role="tabpanel" aria-labelledby="tab-sekolah" hidden>
+<div class="card tint-cyan">
+<video class="card-video" src="./assets/clips/clip-05.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<div class="school-hero">
+<div class="school-icon"></div>
+<div>
+<h2 class="c-cyan h2-tight-sm">SMK Raden Paku</h2>
+<p class="p-flush">Tempatku menuntut ilmu setiap hari</p>
+</div>
+</div>
+</div>
+<div class="card tint-purple">
+<video class="card-video" src="./assets/clips/clip-06.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-purple">Cerita Sekolahku</h2>
+<p>Aku adalah salah satu siswa di <strong>SMK Raden Paku</strong>, kelas <strong>11 TKJ 2</strong>. Di sekolah, aku belajar banyak hal baru dan bertemu teman-teman yang seru. Sekolah bukan cuma tempat belajar pelajaran, tapi juga tempat aku belajar tentang kehidupan dan pertemanan.</p>
+<div class="chip-list">
+<div class="chip"> Pelajar Aktif</div>
+<div class="chip"> Semangat Belajar</div>
+<div class="chip"> Suka Berteman</div>
+</div>
+</div>
+<div class="card tint-orange">
+<video class="card-video" src="./assets/clips/clip-07.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-orange">Guru-Guru di Sekolahku </h2>
+<p>Ini dia beberapa guru yang ngajar aku di sekolah:</p>
+<div class="teacher-grid">
+<div class="teacher-card teacher-1">
+<span class="teacher-emoji"></span>
+<div>
+<div class="teacher-label">GURU ASJ</div>
+<div class="teacher-name">Pak Iwan</div>
+</div>
+</div>
+<div class="teacher-card teacher-2">
+<span class="teacher-emoji"></span>
+<div>
+<div class="teacher-label">GURU AIJ</div>
+<div class="teacher-name">Pak Bayu</div>
+</div>
+</div>
+<div class="teacher-card teacher-3">
+<span class="teacher-emoji"></span>
+<div>
+<div class="teacher-label">GURU OLAHRAGA</div>
+<div class="teacher-name">Pak Jefry</div>
+</div>
+</div>
+<div class="teacher-card teacher-4">
+<span class="teacher-emoji"></span>
+<div>
+<div class="teacher-label">GURU BAHASA JAWA</div>
+<div class="teacher-name">Bu Dara</div>
+</div>
+</div>
+<div class="teacher-card teacher-6">
+<span class="teacher-emoji"></span>
+<div>
+<div class="teacher-label">WALI KELAS</div>
+<div class="teacher-name">Bu Rissa</div>
+</div>
+</div>
+<div class="teacher-card teacher-5 fav">
+<span class="teacher-emoji"></span>
+<div>
+<div class="teacher-label">GURU FAVORIT</div>
+<div class="teacher-name">Bu Rinda</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="page" id="hobi" role="tabpanel" aria-labelledby="tab-hobi" hidden>
+<div class="card tint-yellow">
+<video class="card-video" src="./assets/clips/clip-08.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-yellow">Hobi & Kesukaanku</h2>
+<p>Ada beberapa hal yang paling bikin aku senang: makan enak, nonton anime, dan main game. Ini dia sedikit cerita tentang hobiku!</p>
+<div class="hobby-grid">
+<div class="hobby-card">
+<span class="emoji"></span>
+<h3>Suka Makan</h3>
+<p class="p-flush">Wisata kuliner itu menyenangkan, apalagi kalau nemu makanan enak baru.</p>
+</div>
+<div class="hobby-card">
+<span class="emoji"></span>
+<h3>Suka Anime</h3>
+<p class="p-flush">Nonton anime jadi cara favoritku buat rehat dan seru-seruan.</p>
+</div>
+<div class="hobby-card span-full">
+<span class="emoji"></span>
+<h3>Main Free Fire</h3>
+<p class="p-flush">Booyah bareng squad itu momen paling seru. Add ID aku ya!</p>
+<button type="button" class="id-tag" id="ffIdTag" title="Klik buat copy">ID: 1890895075 </button>
+</div>
+</div>
+</div>
+<div class="card tint-orange">
+<video class="card-video" src="./assets/clips/clip-09.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-orange">Kesukaan Lainnya</h2>
+<p>Beberapa hal kecil (dan besar ) yang bikin harinya makin seru:</p>
+<div class="fav-grid">
+<div class="fav-item">
+<span class="fav-emoji"></span>
+<div>
+<div class="fav-label">MAKANAN FAVORIT</div>
+<div class="fav-value">KFC Ayam Paha</div>
+</div>
+</div>
+<div class="fav-item">
+<span class="fav-emoji"></span>
+<div>
+<div class="fav-label">MINUMAN FAVORIT</div>
+<div class="fav-value">Air Putih</div>
+</div>
+</div>
+<div class="fav-item">
+<span class="fav-emoji"></span>
+<div>
+<div class="fav-label">MOBIL IDAMAN</div>
+<div class="fav-value">BMW M4</div>
+</div>
+</div>
+<div class="fav-item">
+<span class="fav-emoji"></span>
+<div>
+<div class="fav-label">PENGEN PUNYA</div>
+<div class="fav-value">Toyota Innova Reborn</div>
+</div>
+</div>
+<div class="fav-item span-full">
+<span class="fav-emoji"></span>
+<div>
+<div class="fav-label">MIMPI TERLIAR</div>
+<div class="fav-value">Pengen Ke Isekai </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="page" id="game" role="tabpanel" aria-labelledby="tab-game" hidden>
+<div class="card tint-cyan">
+<video class="card-video" src="./assets/clips/clip-10.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="rainbow-text page-title"> Game Favoritku</h2>
+<p>Selain nonton anime, waktu luangku juga sering abis buat main game. Ini dia tiga game yang paling sering aku mainkan!</p>
+<div class="game-grid">
+<div class="game-card game-1">
+<span class="game-emoji"></span>
+<h3>Free Fire</h3>
+<p>Battle royale andalan, booyah bareng squad!</p>
+<span class="game-rank">ID: 1890895075</span>
+</div>
+<div class="game-card game-2">
+<span class="game-emoji"></span>
+<h3>Mobile Legends</h3>
+<p>MOBA seru buat push rank bareng temen.</p>
+<span class="game-rank">Let's Push Rank!</span>
+</div>
+<div class="game-card game-3">
+<span class="game-emoji"></span>
+<h3>Super Sus</h3>
+<p>Seru-seruan cari impostor bareng squad.</p>
+<span class="game-rank">Sus or Not? </span>
+</div>
+</div>
+</div>
+</section>
+<section class="page" id="kontak" role="tabpanel" aria-labelledby="tab-kontak" hidden>
+<div class="card tint-cyan">
+<video class="card-video" src="./assets/clips/clip-11.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-cyan">Tentang Diri Saya</h2>
+<p>Kalau mau kenal lebih jauh atau say hi, ini cara paling gampang buat nemuin aku:</p>
+<div class="contact-grid">
+<div class="contact-item">
+<span class="contact-emoji"></span>
+<div>
+<div class="contact-label">EMAIL</div>
+<div class="contact-value">em.be.alawi@gmail.com</div>
+</div>
+</div>
+<div class="contact-item">
+<span class="contact-emoji"></span>
+<div>
+<div class="contact-label">TIKTOK</div>
+<div class="contact-value">Clasher Coc</div>
+</div>
+</div>
+</div>
+<div class="contact-note">
+ℹ Nomor telepon sengaja gak ditampilkan di halaman publik ini demi keamanan — biar gak disalahgunakan orang gak dikenal. Kalau mau ngobrol langsung, DM aja lewat TikTok atau email di atas ya!
+</div>
+</div>
+</section>
+<section class="page" id="pesan" role="tabpanel" aria-labelledby="tab-pesan" hidden>
+<div class="card tint-orange">
+<video class="card-video" src="./assets/clips/clip-12.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+<h2 class="c-orange">Kesan & Pesan</h2>
+<p>Terima kasih sudah mampir ke halaman biodataku! Semoga kamu jadi lebih kenal sama aku, M. Baihaqi Alawi, siswa SMK Raden Paku yang suka makan, anime, dan main Free Fire.</p>
+<div class="pesan-list">
+<div class="pesan-row">
+<div class="num">1</div>
+<div>Tetaplah semangat walau ga punya penyemangat. </div>
+</div>
+<div class="pesan-row">
+<div class="num">2</div>
+<div>Rezeki, jodoh, sama nilai raport itu urusan Yang Di Atas — tugas kita cuma usaha dan berdoa terus. </div>
+</div>
+<div class="pesan-row">
+<div class="num">3</div>
+<div>Sesekali gagal itu wajar, yang penting jangan berhenti nyoba lagi. </div>
+</div>
+</div>
+</div>
+<div class="quote-box">
+<p>"Hidup itu kayak nonton anime, seru kalau dijalani episode demi episode."</p>
+<span>— M. Baihaqi Alawi</span>
+</div>
+</section>
+</main>
+<footer><div id="visitBadge" class="visit-badge"> Kunjungan ke-1</div></footer>
+
+<script src="./assets/3d-data/soda-zero.js"></script>
+<script src="./assets/3d-data/soda-radler.js"></script>
+<script src="./js/data.js"></script>
+<script src="./js/vendor-loader.js"></script>
+<script src="./js/utils.js"></script>
+<script src="./js/modules/nav.js"></script>
+<script src="./js/modules/hero.js"></script>
+<script src="./js/modules/roll.js"></script>
+<script src="./js/modules/avatar.js"></script>
+<script src="./js/modules/copy-id.js"></script>
+<script src="./js/modules/modal.js"></script>
+<script src="./js/modules/scroll.js"></script>
+<script src="./js/modules/visit.js"></script>
+<script src="./js/modules/tilt.js"></script>
+<script src="./js/modules/reveal-text.js"></script>
+<script src="./js/modules/sky.js"></script>
+<script src="./js/modules/scene-3d.js"></script>
+<script src="./js/modules/soda-stage.js"></script>
+<script src="./js/main.js"></script>
+<script src="./assets/index-Bq2_L1dX.js"></script>
+</body>
+</html>

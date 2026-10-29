@@ -1,0 +1,493 @@
+/* ==========================================================
+   components.css
+   Kartu, label, tombol, status, modal, toast, dan elemen melayang.
+   ========================================================== */
+
+/* ---------- Kartu ---------- */
+.card,
+.fun-card {
+  margin-top: 22px;
+  padding: 26px 28px;
+  background: var(--surface-raised);
+  border-radius: var(--radius-xl);
+}
+
+.card {
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--dur-fast) ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  letter-spacing: 0.2px;
+}
+
+.card p,
+.card li {
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Warna tint hanya untuk paragraf pembuka kartu (anak langsung).
+   Komponen di dalam kartu mengatur warnanya sendiri agar kontras terjaga. */
+.card.tint-pink > p   { color: var(--tint-pink); }
+.card.tint-cyan > p   { color: var(--tint-cyan); }
+.card.tint-yellow > p { color: var(--tint-yellow); }
+.card.tint-purple > p { color: var(--tint-purple); }
+.card.tint-orange > p { color: var(--tint-orange); }
+.card.tint-green > p  { color: var(--tint-green); }
+
+.fun-card {
+  border: 1px dashed var(--line-dashed);
+  text-align: center;
+}
+
+/* Warna judul kartu */
+.c-pink   { color: var(--pink); }
+.c-cyan   { color: var(--cyan); }
+.c-yellow { color: var(--yellow); }
+.c-purple { color: var(--purple); }
+.c-orange { color: var(--orange); }
+.c-green  { color: var(--green); }
+
+.h2-tight    { margin-bottom: 6px; }
+.h2-tight-sm { margin-bottom: 4px; }
+.page-title  { font-size: 1.5rem; }
+.text-dim    { color: var(--text-muted); }
+.p-flush     { margin: 0; }
+.span-full   { grid-column: 1 / -1; }
+
+/* ---------- Label dan nilai (info biodata) ---------- */
+.info-item {
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--cyan);
+}
+
+.info-item--pink   { border-left-color: var(--pink); }
+.info-item--yellow { border-left-color: var(--yellow); }
+.info-item--orange { border-left-color: var(--orange); }
+
+.info-item .label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cyan);
+}
+
+.info-item .value {
+  margin-top: 4px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+/* Tombol berbentuk nilai (ID Free Fire) */
+.value--action {
+  display: flex;
+  align-items: center;
+  min-height: 44px; /* target sentuh minimal */
+  width: 100%;
+  text-align: left;
+  border-radius: var(--radius-md);
+  padding: 2px 4px;
+  margin-left: -4px;
+  transition: background-color var(--dur-fast) ease;
+}
+
+.value--action:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Badge, chip, status ---------- */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.badge {
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--bg-ink);
+}
+
+.badge.badge-1 { background: var(--yellow); }
+.badge.badge-2 { background: var(--pink); }
+.badge.badge-3 { background: var(--cyan); }
+.badge.badge-4 { background: var(--purple); }
+.badge.badge-5 { background: var(--green); }
+.badge.badge-6 { background: var(--orange); }
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.status-strip,
+.pkl-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  font-weight: 700;
+}
+
+.status-strip {
+  background: linear-gradient(90deg, rgba(62, 242, 160, 0.18), rgba(51, 242, 224, 0.12));
+  border: 2px dashed rgba(62, 242, 160, 0.4);
+}
+
+.pkl-status {
+  margin-top: 20px;
+  background: linear-gradient(90deg, rgba(255, 138, 61, 0.18), rgba(255, 79, 216, 0.12));
+  border: 2px dashed rgba(255, 138, 61, 0.4);
+}
+
+.status-strip .dot,
+.pkl-status .dot {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: dot-pulse 1.6s ease-in-out infinite;
+}
+
+.status-strip .dot { background: var(--green); box-shadow: 0 0 0 4px rgba(62, 242, 160, 0.25); }
+.pkl-status .dot   { background: var(--orange); box-shadow: 0 0 0 4px rgba(255, 138, 61, 0.25); }
+
+@keyframes dot-pulse {
+  0%,
+  100% { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.06); }
+}
+
+/* ---------- Emoji dan tombol ---------- */
+.emoji {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.emoji--inline {
+  display: inline;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.btn,
+.roll-btn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 12px 26px;
+  border-radius: var(--radius-chip);
+  color: var(--bg-ink);
+  transition: transform var(--dur-fast) ease;
+}
+
+.roll-btn {
+  margin-top: 14px;
+  background: var(--pink);
+}
+
+.roll-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+}
+
+.roll-btn:active {
+  transform: scale(0.95);
+}
+
+.btn--accent {
+  margin-top: 16px;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  background: var(--yellow);
+}
+
+.quote-output {
+  margin-top: 16px;
+  min-height: 1.4em;
+  font-style: italic;
+  color: var(--text);
+  transition: opacity 0.2s ease;
+}
+
+.quote-output.is-hidden {
+  opacity: 0;
+}
+
+/* ---------- Kutipan dan catatan ---------- */
+.quote-box {
+  margin-top: 20px;
+  padding: 34px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, rgba(255, 79, 216, 0.15), rgba(139, 107, 255, 0.15));
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xl);
+}
+
+.quote-box p {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text);
+}
+
+.quote-box span {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--yellow);
+}
+
+.contact-note {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: rgba(255, 203, 71, 0.08);
+  border: 1px dashed rgba(255, 203, 71, 0.35);
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* ---------- Baris daftar (anime, pesan) ---------- */
+.anime-list,
+.pesan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.anime-row,
+.pesan-row,
+.fav-item,
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  transition: box-shadow var(--dur-fast) ease;
+}
+
+.anime-row:hover,
+.pesan-row:hover,
+.fav-item:hover,
+.contact-item:hover {
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.38);
+}
+
+.fav-item {
+  padding: 16px;
+  border-left: 4px solid var(--orange);
+}
+
+.contact-item {
+  padding: 16px 18px;
+  border-left: 4px solid var(--sky);
+}
+
+.fav-emoji,
+.contact-emoji {
+  flex-shrink: 0;
+  font-size: 1.8rem;
+}
+
+.fav-label,
+.contact-label {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.fav-label { color: var(--orange); }
+.contact-label   { color: var(--sky); }
+
+.fav-value {
+  margin-top: 2px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.contact-value {
+  margin-top: 2px;
+  font-size: 1.02rem;
+  font-weight: 700;
+  word-break: break-word;
+}
+
+.num {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--bg-ink);
+}
+
+.anime-row .num { background: var(--yellow); }
+.pesan-row .num { background: var(--orange); }
+
+/* ---------- Tombol ke atas, badge kunjungan, toast ---------- */
+.to-top {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: var(--z-badge);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--cyan);
+  border-radius: 50%;
+  background: var(--chrome-bg);
+  color: var(--cyan);
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-chip);
+  /* visibility: hidden membuat tombol tidak bisa difokus saat tersembunyi */
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity var(--dur-base) ease, transform var(--dur-base) ease, visibility var(--dur-base) ease;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.visit-badge {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: var(--z-badge);
+  padding: 8px 14px;
+  border: 2px solid var(--green);
+  border-radius: var(--radius-pill);
+  background: var(--chrome-bg);
+  color: var(--green);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-chip);
+}
+
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  z-index: var(--z-toast);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--green);
+  color: var(--bg-ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -20px);
+  transition: opacity var(--dur-base) ease, transform var(--dur-base) ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Modal ---------- */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--overlay);
+}
+
+.modal__box {
+  max-width: 420px;
+  padding: 32px;
+  text-align: center;
+  background: var(--surface-raised);
+  border: 3px solid var(--yellow);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 0 40px rgba(255, 203, 71, 0.4);
+}
+
+.modal h2 {
+  margin-bottom: 12px;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  position: relative;
+  z-index: var(--z-content);
+  padding: 24px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Layar kecil ---------- */
+@media (max-width: 480px) {
+  .card,
+  .fun-card {
+    padding: 20px 18px;
+    border-radius: var(--radius-card-sm);
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .card p,
+  .card li {
+    font-size: 0.95rem;
+  }
+}

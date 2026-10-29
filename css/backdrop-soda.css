@@ -1,0 +1,79 @@
+/* ==========================================================
+   backdrop-soda.css
+   Latar bergaya halaman Bintang Zero: gradien radial biru
+   dengan gelembung yang naik. Menimpa latar lama (gradien teal
+   di base.css dan gambar nebula.jpg di fx.css).
+
+   Untuk kembali ke latar lama, hapus baris <link> file ini
+   dari index.html. Tidak ada perubahan lain yang perlu dibatalkan.
+   ========================================================== */
+
+body {
+  background: radial-gradient(
+    circle at center,
+    var(--soda-inner) 0%,
+    var(--soda-mid) 50%,
+    var(--soda-outer) 100%
+  );
+  background-attachment: fixed;
+}
+
+/* Gambar nebula tidak dipakai lagi */
+#nebulaGlow {
+  display: none;
+}
+
+/* Langit 2D (sky.js) menggambar gradien opaque yang menutupi latar ini.
+   Canvas-nya disembunyikan, sehingga bintang, aurora, dan bulan ikut mati.
+   Partikel 3D di #bgWebGL tetap tampil karena transparan. */
+#bg3d #bgCanvas {
+  display: none;
+}
+
+/* ---------- Gelembung (dibuat dari CSS, tanpa gambar eksternal) ---------- */
+.soda-bubbles {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-bg);
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.soda-bubbles i {
+  position: absolute;
+  bottom: -60px;
+  left: var(--x);
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.9) 0 8%,
+    rgba(122, 208, 255, 0.35) 22%,
+    rgba(122, 208, 255, 0.08) 60%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+  opacity: var(--o);
+  animation: soda-rise var(--d) linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes soda-rise {
+  from {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(12px, -50vh);
+  }
+  to {
+    transform: translate(-8px, -115vh);
+  }
+}
+
+/* Gelembung dimatikan saat "kurangi gerakan" aktif */
+@media (prefers-reduced-motion: reduce) {
+  .soda-bubbles {
+    display: none;
+  }
+}
